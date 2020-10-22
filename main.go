@@ -10,7 +10,7 @@ import (
 type Pokemon struct {
     ID string `json:"id,omitempty"`
     Name string `json:"name,omitempty"`
-    Type *Type `json:"type,omitempty"`
+    Type []*Type `json:"type,omitempty"`
 }
 
 type Type struct {
@@ -22,8 +22,8 @@ var pokedex []Pokemon
 
 // função principal
 func main() {	
-	pokedex = append(pokedex, Pokemon{ID: "1", Name: "Bulbasaur", Type: &Type {ID: "1", Name: "Water"}})
-	pokedex = append(pokedex, Pokemon{ID: "2", Name: "Charmander", Type: &Type {ID: "2", Name: "Fire"}})
+	pokedex = append(pokedex, Pokemon{ID: "1", Name:"Bulbasaur", Type: []*Type{ &Type{ID: "1", Name: "Water"}, &Type{ID: "2", Name: "Water"}}})
+    pokedex = append(pokedex, Pokemon{ID: "2", Name: "Charmander", Type: []*Type { &Type{ID: "2", Name: "Fire"}}})
 	pokedex = append(pokedex, Pokemon{ID: "3", Name: "Gengar"})
 
 	router := mux.NewRouter()
