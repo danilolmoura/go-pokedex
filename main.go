@@ -8,23 +8,107 @@ import (
 )
 
 type Pokemon struct {
-    ID string `json:"id,omitempty"`
-    Name string `json:"name,omitempty"`
-    Type []*Type `json:"type,omitempty"`
+    ID string `json:"id"`
+    Num string `json:"num"`
+    Name string `json:"name"`
+    Img string `json:"img"`
+    Type []string `json:"type"`
+    Height string `json:"heigh"`
+    Weight string `json:"weigh"`
+    Candy string `json:"candy"`
+    CandyCount int `json:"candy_count"`
+    Egg string `json:"egg"`
+    SpawnChance float32 `json:"spawn_chance"`
+    AvgSpawns float32 `json:"avg_spawns"`
+    SpawnTime string `json:"spawn_time"`
+    Multipliers []float32 `json:"multipliers"`
+    Weaknesses []string `json:"weaknesses"`
+    NextEvolution []*NextEvolution `json:"next_evolution"`
+
 }
 
-type Type struct {
-    ID  string `json:"id,omitempty"`
-    Name string `json:"name,omitempty"`
+type NextEvolution struct {
+    Num string `json:"num"`
+    Name string `json:"name"`
 }
 
 var pokedex []Pokemon
 
-// função principal
 func main() {	
-	pokedex = append(pokedex, Pokemon{ID: "1", Name:"Bulbasaur", Type: []*Type{ &Type{ID: "1", Name: "Water"}, &Type{ID: "2", Name: "Water"}}})
-    pokedex = append(pokedex, Pokemon{ID: "2", Name: "Charmander", Type: []*Type { &Type{ID: "2", Name: "Fire"}}})
-	pokedex = append(pokedex, Pokemon{ID: "3", Name: "Gengar"})
+	pokedex = append(
+        pokedex,
+        Pokemon{
+            ID: "1",
+            Num: "001",
+            Name: "Bulbasaur",
+            Img: "http://www.serebii.net/pokemongo/pokemon/001.png",
+            Type: []string{
+                "Grass",
+                "Poison",
+            },
+            Height: "0.71 m",
+            Weight: "6.9 kg",
+            Candy: "Bulbasaur Candy",
+            CandyCount: 25,
+            Egg: "2 km",
+            SpawnChance: 0.69,
+            AvgSpawns: 69,
+            SpawnTime: "20:00",
+            Multipliers: []float32{
+                1.58,
+            },
+            Weaknesses: []string{
+                "Fire",
+                "Ice",
+                "Flying",
+                "Psychic",
+            },
+            NextEvolution: []*NextEvolution{
+                &NextEvolution{
+                    Num: "002",
+                    Name: "Ivysaur",
+                },
+                &NextEvolution{
+                    Num: "003",
+                    Name: "Venusaur",
+                },
+            },
+        },
+    )
+
+    pokedex = append(
+        pokedex,
+        Pokemon{
+            ID: "4",
+            Num: "004",
+            Name: "Charmander",
+            Img: "http://www.serebii.net/pokemongo/pokemon/004.png",
+            Type: []string{
+                "Fire",
+            },
+            Height: "0.61 m",
+            Weight: "8.5 kg",
+            Candy: "Charmander Candy",
+            CandyCount: 25,
+            Egg: "2 km",
+            SpawnChance: 0.253,
+            AvgSpawns: 25.3,
+            SpawnTime: "08:45",
+            Multipliers: []float32{
+                1.65,
+            },
+            NextEvolution: []*NextEvolution{
+                &NextEvolution{
+                    Num: "005",
+                    Name: "Charmeleon",
+                },
+                &NextEvolution{
+                    Num: "006",
+                    Name: "Charizard",
+                },
+            },
+        },
+    )
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", Index).Methods("GET")
